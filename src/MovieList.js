@@ -39,7 +39,7 @@ export default class MovieList extends Component {
       const imgBase = `https://image.tmdb.org/t/p/w200`;
       return (
           movieList
-          .filter(item => item.title.includes(this.props.searchProp.toLowerCase()))
+          .filter(item => item.title.toLowerCase().includes(this.props.searchProp.toLowerCase()))
           .map(item => {
             return (
                 <Card className="col-lg-4 col-md-6 col-sm-12 my-1 px-0">

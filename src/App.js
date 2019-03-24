@@ -3,6 +3,8 @@ import logo from "./logo.svg";
 import MovieList from "./MovieList.js";
 import DropDownBar from "./DropDownBar.js";
 import SearchBar from "./SearchBar.js";
+// import YearRange from "./YearRange.js";
+// import YearRangeNew from "./YearRangeNew.js";
 
 class App extends Component {
   constructor() {
@@ -12,13 +14,12 @@ class App extends Component {
     };
   }
 
-
-  onSearchTermChanged= (text) => {
+  onSearchTermChanged = text => {
     this.setState({
       searchTerm: text
-    })
-  }
-  
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -28,7 +29,7 @@ class App extends Component {
             Movies in a click
           </a>
           <div>
-            <SearchBar textChange = {this.onSearchTermChanged}/> 
+            <SearchBar textChange={this.onSearchTermChanged} />
           </div>
         </nav>
         {/* Create the body */}
@@ -40,10 +41,13 @@ class App extends Component {
               <div>
                 <DropDownBar />
               </div>
+              <br />
+              <div>{/* <YearRange /> */}</div>
+              <div>{/* <YearRangeNew /> */}</div>
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <div className="row">
-                <MovieList searchProp={this.state.searchTerm}/>
+                <MovieList searchProp={this.state.searchTerm} />
               </div>
             </div>
           </div>

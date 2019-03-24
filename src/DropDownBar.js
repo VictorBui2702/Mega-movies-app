@@ -28,14 +28,16 @@ export default class DropDownBar extends Component {
               Action
             </a>
             <a className="dropdown-item" href="#">
-              Another action
+              Comedy
             </a>
             <a className="dropdown-item" href="#">
-              Something else here
+              Romance
             </a>
-            <div className="dropdown-divider" />
             <a className="dropdown-item" href="#">
-              Separated link
+              Adventure
+            </a>
+            <a className="dropdown-item" href="#">
+              Science fiction
             </a>
           </div>
         </div>
