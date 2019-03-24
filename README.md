@@ -1,4 +1,4 @@
-Demo link: movies-in-a-click.netlify.com
+Demo link: http://movies-in-a-click.netlify.com
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
