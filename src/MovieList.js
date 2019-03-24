@@ -38,9 +38,11 @@ export default class MovieList extends Component {
     } else {
       const imgBase = `https://image.tmdb.org/t/p/w200`;
       return (
-          movieList.map(item => {
+          movieList
+          .filter(item => item.title.includes(this.props.searchProp.toLowerCase()))
+          .map(item => {
             return (
-                <Card className="col-4">
+                <Card className="col-lg-4 col-md-6 col-sm-12 my-1 px-0">
                   <img src={imgBase + item.poster_path} alt="" />
                   <div className = "font-weight-bold">{item.title}</div>
                   <div>Release date: {item.release_date}</div>
