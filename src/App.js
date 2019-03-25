@@ -10,7 +10,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
+      dropDownButtonClicked: false,
+      updatedByGenre: false,
+      genres: []
     };
   }
 
@@ -19,6 +22,29 @@ class App extends Component {
       searchTerm: text
     });
   };
+
+  async componentDidMount() {
+    this.fetchGenre();
+  }
+
+  async fetchGenre () {
+    
+    let apiKey = "af6a5c351fe40351a80dac8d8116f035";
+    let url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
+
+    try {
+      let response = await fetch(url);
+      let genreInfo = await response.json();
+      console.log('gengreInfo', genreInfo);
+      this.setState({      
+        genres: genreInfo.genres
+      });
+    } catch (err) {
+      this.setState({
+        error: err
+      });
+    }
+  }
 
   render() {
     return (
@@ -39,7 +65,7 @@ class App extends Component {
               <br />
               <div style={{ fontSize: 40 }}>Genre</div>
               <div>
-                <DropDownBar />
+                <DropDownBar options={this.state.genres} isClicked = {! this.state.dropDownButtonClicked}/>
               </div>
               <br />
               <div>{/* <YearRange /> */}</div>

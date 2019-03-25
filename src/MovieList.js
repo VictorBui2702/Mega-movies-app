@@ -7,7 +7,8 @@ export default class MovieList extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      movieList: []
+      movieList: [],
+      genreList: []
     };
   }
 
@@ -31,6 +32,8 @@ export default class MovieList extends Component {
     }
   }
 
+  
+
   render() {
     const { error, isLoaded, movieList } = this.state;
     if (error) {
@@ -40,6 +43,7 @@ export default class MovieList extends Component {
       return (
           movieList
           .filter(item => item.title.toLowerCase().includes(this.props.searchProp.toLowerCase()))
+          // .filter(item => item.genre.id)
           .map(item => {
             return (
                 <Card className="col-lg-4 col-md-6 col-sm-12 my-1 px-0">
