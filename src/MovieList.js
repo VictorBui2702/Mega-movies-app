@@ -19,7 +19,6 @@ export default class MovieList extends Component {
     try {
       let response = await fetch(url);
       let movieInfo = await response.json();
-      console.log(movieInfo);
       this.setState({
         error: null,
         isLoaded: true,
@@ -36,14 +35,21 @@ export default class MovieList extends Component {
 
   render() {
     const { error, isLoaded, movieList } = this.state;
+    let filteredMoviesList = movieList;
+    if(this.props.searchProp != '') {
+      filteredMoviesList = filteredMoviesList.filter(item => item.title.toLowerCase().includes(this.props.searchProp.toLowerCase()))
+    }
+    if(this.props.filterGenreProp != null) {
+      console.log('xxx', filteredMoviesList);
+      filteredMoviesList = filteredMoviesList.filter( movie => movie.genre_ids.includes(this.props.filterGenreProp));
+    }
+
     if (error) {
       return <div>Error: {error.message}</div>;
     } else {
       const imgBase = `https://image.tmdb.org/t/p/w200`;
       return (
-          movieList
-          .filter(item => item.title.toLowerCase().includes(this.props.searchProp.toLowerCase()))
-          // .filter(item => item.genre.id)
+          filteredMoviesList
           .map(item => {
             return (
                 <Card className="col-lg-4 col-md-6 col-sm-12 my-1 px-0">

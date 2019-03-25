@@ -30,7 +30,7 @@ export default class DropDownBar extends Component {
           </button>
           <div className={menuClass} aria-labelledby="dropdownMenuButton">
           
-              {this.props.options.map(item => <a className="dropdown-item" href="#">
+              {this.props.options.map(item => <a className="dropdown-item" href="#" onClick={() => this.props.handleFilter(item.id)}>
               {item.name}
             </a>)}
          

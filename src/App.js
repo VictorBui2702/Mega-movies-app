@@ -19,7 +19,8 @@ class App extends Component {
 
   onSearchTermChanged = text => {
     this.setState({
-      searchTerm: text
+      searchTerm: text,
+      filteredGenreId: null
     });
   };
 
@@ -46,6 +47,12 @@ class App extends Component {
     }
   }
 
+  handleFilter(genreId) {
+    this.setState({
+      filteredGenreId: genreId
+    }) 
+  }
+
   render() {
     return (
       <div className="App">
@@ -65,7 +72,7 @@ class App extends Component {
               <br />
               <div style={{ fontSize: 40 }}>Genre</div>
               <div>
-                <DropDownBar options={this.state.genres} isClicked = {! this.state.dropDownButtonClicked}/>
+                <DropDownBar options={this.state.genres} isClicked = {! this.state.dropDownButtonClicked} handleFilter={(gId) => this.handleFilter(gId)}/>
               </div>
               <br />
               <div>{/* <YearRange /> */}</div>
@@ -73,7 +80,7 @@ class App extends Component {
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <div className="row">
-                <MovieList searchProp={this.state.searchTerm} />
+                <MovieList searchProp={this.state.searchTerm} filterGenreProp={this.state.filteredGenreId}/>
               </div>
             </div>
           </div>
