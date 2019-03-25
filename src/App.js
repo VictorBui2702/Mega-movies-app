@@ -3,6 +3,8 @@ import logo from "./logo.svg";
 import MovieList from "./MovieList.js";
 import DropDownBar from "./DropDownBar.js";
 import SearchBar from "./SearchBar.js";
+import YouTube from '@u-wave/react-youtube';
+import ReactModal from 'react-modal';
 // import YearRange from "./YearRange.js";
 // import YearRangeNew from "./YearRangeNew.js";
 
@@ -10,7 +12,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
     };
   }
 
@@ -50,6 +52,7 @@ class App extends Component {
                 <MovieList searchProp={this.state.searchTerm} />
               </div>
             </div>
+            
           </div>
         </div>
       </div>

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import {Card} from "reactstrap";
+import {Card, Button} from "reactstrap";
+import ReactModal from 'react-modal';
+import YouTube from '@u-wave/react-youtube';
+
 
 export default class MovieList extends Component {
   constructor() {
@@ -7,7 +10,10 @@ export default class MovieList extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      movieList: []
+      movieList: [],
+      trailerList: [],
+      showModal: false
+
     };
   }
 
@@ -31,6 +37,18 @@ export default class MovieList extends Component {
     }
   }
 
+  fetchTrailer = movie_id => {
+    
+      this.setState({ showModal: true})
+    let apiKey = "af6a5c351fe40351a80dac8d8116f035";
+    let url = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${apiKey}&language=en-US`;
+
+    fetch(url).
+      then(results => results.json()).
+      then( data => this.setState({trailerList: data.results.filter(video => video.type === "Trailer")}))
+  }
+
+
   render() {
     const { error, isLoaded, movieList } = this.state;
     if (error) {
@@ -46,11 +64,25 @@ export default class MovieList extends Component {
                   <img src={imgBase + item.poster_path} alt="" />
                   <div className = "font-weight-bold">{item.title}</div>
                   <div>Release date: {item.release_date}</div>
+                  
                   <div>Rating: {item.vote_average}</div>
+                  <Button color="danger" onClick={()=>{
+                    this.fetchTrailer(item.id);
+                  }} > Show trailer </Button>
+                    <ReactModal isOpen={this.state.showModal}>
+                     
+                     <YouTube
+                        video= {this.state.trailerList[0] && this.state.trailerList[0].key}
+                        autoplay />)
+                          <button onClick={() => this.setState({ showModal: false})}> Hide Modal </button>
+                       </ReactModal>
+               
                 </Card>
+               
             );
           })
       );
     }
+    
   }
 }
